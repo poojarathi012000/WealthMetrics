@@ -5,33 +5,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WealthMetrics - SIP Calculator</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="container">
-        <h1>Welcome to WealthMetrics</h1>
+        <h1>Good morning!</h1>
         
-        <!-- Navia Logo -->
-        <img src="navia-logo.png" alt="Navia Logo" width="200">
+        <!-- SIP/Lumpsum Toggle -->
+        <div class="toggle-container">
+            <label>
+                <input type="radio" name="investmentType" checked> SIP
+            </label>
+            <label>
+                <input type="radio" name="investmentType"> Lumpsum
+            </label>
+        </div>
 
-        <!-- Link to Navia Website -->
-        <p>Visit <a href="https://navia.co.in" target="_blank">Navia</a></p>
+        <!-- Investment Input Fields -->
+        <div class="input-container">
+            <label>Monthly Investment</label>
+            <input type="range" id="monthlyInvestment" min="500" max="50000" step="500" value="5000" oninput="updateValue(this, 'investmentValue')">
+            <span id="investmentValue">₹ 5000</span>
+        </div>
 
-        <!-- SIP Calculator Section -->
-        <h2>SIP Calculator</h2>
-        <div class="sip-calculator">
-            <label for="monthlyInvestment">Monthly Investment (₹):</label>
-            <input type="number" id="monthlyInvestment" placeholder="Enter amount" required>
+        <div class="input-container">
+            <label>Expected Return Rate</label>
+            <input type="range" id="interestRate" min="5" max="20" step="0.1" value="12" oninput="updateValue(this, 'interestValue', '%')">
+            <span id="interestValue">12%</span>
+        </div>
 
-            <label for="interestRate">Expected Annual Return (%):</label>
-            <input type="number" id="interestRate" placeholder="Enter interest rate" required>
+        <div class="input-container">
+            <label>Investment Duration</label>
+            <input type="range" id="investmentPeriod" min="1" max="30" step="1" value="15" oninput="updateValue(this, 'durationValue', ' Years')">
+            <span id="durationValue">15 Years</span>
+        </div>
 
-            <label for="investmentPeriod">Investment Period (Years):</label>
-            <input type="number" id="investmentPeriod" placeholder="Enter duration" required>
+        <div class="results">
+            <h3>Total Returns: ₹ <span id="totalReturns">0</span></h3>
+            <h3>Total Investment: ₹ <span id="totalInvestment">0</span></h3>
+            <h3>Total Value: ₹ <span id="totalValue">0</span></h3>
+        </div>
 
-            <button onclick="calculateSIP()">Calculate</button>
+        <!-- Pie Chart -->
+        <canvas id="investmentChart"></canvas>
 
-            <h3>Total Invested Amount: ₹<span id="totalInvestment">0</span></h3>
-            <h3>Estimated Returns: ₹<span id="maturityAmount">0</span></h3>
+        <!-- Investment Platforms -->
+        <div class="investing-platforms">
+            <h3>Start Investing</h3>
+            <p>Open demat account to invest</p>
+            <img src="groww.png" alt="Groww">
+            <img src="zerodha.png" alt="Zerodha">
+            <img src="upstox.png" alt="Upstox">
+            <img src="kotak.png" alt="Kotak Securities">
         </div>
     </div>
 
